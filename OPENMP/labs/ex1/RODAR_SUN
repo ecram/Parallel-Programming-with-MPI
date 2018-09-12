@@ -1,0 +1,1 @@
+OMP_DYNAMIC=FALSE OMP_NUM_THREADS=10 ./omp_hello_sun

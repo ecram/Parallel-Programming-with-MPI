@@ -1,0 +1,414 @@
+.TH PFMON 1 "Dec 2008" "pfmon" "User's command"
+.SH NAME
+pfmon \- a hardware-based performance monitoring tool
+.SH SYNOPSIS
+.nf
+.B pfmon [OPTION] [PROGNAME]
+.sp
+.SH DESCRIPTION
+The pfmon tool is a command line performance monitoring tool using the perfmon
+interface to access to hardware performance counters of most processors.
+.sp
+With pfmon, it is possible to monitor a single thread or the entire system. 
+It is also possible to monitor multi-process and multi-threaded programs.
+For each, it is possible to collect simple counts or profiles.
+.sp
+The set of events that can be measured depends on the underlying processor.
+Similarly certain options are specific to a processor model. In general
+pfmon gives access to all processor-specific monitoring features.
+.sp
+.SH GENERIC OPTIONS
+Pfmon provides the following options on all processors:
+.TP
+.B -h or --help
+display list of available options and exit
+.TP
+.B -V or --version
+print pfmon version information and exit
+.TP
+.B -l[regex] or --show-events[=regex]
+If \fBregex\fR is not provided, pfmon lists the names of all available events for
+the current processor. Otherwise only the events matching the regular expression are
+printed.
+.TP
+.B -L or --long-show-events[=regex]
+If \fBregex\fR is not provided, pfmon lists all available events for the current
+processor with all their unit masks using the event_name:unit_mask_name
+notation. Only one unit mask per line is printed, thus multiple lines may be
+printed. If \fBregex\fR is provided, it is applied only on the event name and
+not on the unit masks. All event names matching the pattern are printed.
+.TP
+.B -i event or --event-info=event
+Display detailed information about an event. The \fBevent\fR parameter can
+either be the event code, the event name, or a regular expression. In case
+multiple events match the expression, they are all printed.
+.TP
+.B -u, -3, or --user-level
+Monitor at the user level for all events. By default, this option is turned on.
+.TP
+.B -k, -0, or --kernel-level
+Monitor at the kernel level for all events. By default, this option is turned off.
+.TP
+.B -1
+Monitor execution at privilege level 1. By default, this option is turned off.
+.TP
+.B -2
+Monitor execution at privilege level 2. By default, this option is turned off.
+.TP
+.B -e ev1,ev2,... or --events=ev1,ev2,...
+Select events to monitor. The events are specified by name or event code. If
+there are multiple events, they must be passed as a comma separated list
+\fBwithout\fR spaces. The maximum number of events depends on the underlying
+processors. Events requiring unit mask can be specified using the notation:
+event_name:unit_mask1:unit_mask2... Each unit mask can be specified by its
+name or its numerical value. Pfmon also supports passing combination of unit
+masks as a single numerical value. For instance, if event A supports unit masks
+M1 (0x1) and M2 (0x40), and both unit masks are to be measured, then the following
+event specifications are valid: "A:M1:M2", "A:M1:0x40", "A:M2:0x1", "A:0x1:0x40", "A:0x41".
+
+Each \fB-e\fR option forms a set of events,
+multiple sets can be defined by specifying the \fB-e\fR option multiple times.
+Events related options always apply to the last defined sets. All events from a set 
+are measured together. Pfmon uses the perfmon interface to multiplex
+the sets on the actual processor. In case multiple sets are used, pfmon 
+scales the final counts  to provide estimates of what the actual counts
+would have been had all the events been measured throughout the entire
+run. Pfmon does not re-arrange events between sets in case they cannot be measured
+together. It is not possible to use multiple sets when sampling.
+.TP
+.B -I or --info
+Print information related to the pfmon version, the supported processor models and
+built-in sampling modules.
+.TP
+.B -t secs or --session-timeout=secs
+Duration of the monitoring session expressed in seconds. Once the timeout
+expires, pfmon stops monitoring and prints final counts or profiles.
+.TP
+.B -S format or --smpl-module-info=format
+Display information about a sampling module.
+.TP
+.B --debug
+Enable debug output (for experts).
+.TP
+.B --verbose
+Print more information about the execution of pfmon.
+.TP
+.B --outfile=filename
+Print final counts in the file called \fBfilename\fR. By default, all
+results (count or profiles) are printed on the terminal.
+.TP
+.B --append
+Append results (counts or profile) to the current output file. If
+\fB--outfile\fB or \fB--smpl-outfile\fR are not provided results are printed on the screen.
+.TP
+.B --overflow-block
+Block the monitored thread when the sampling buffer becomes full. This option is
+only available in per-thread mode. By default, this option is turned off meaning
+that the monitored thread keeps on running, with monitoring disabled, while pfmon is
+processing the sampling buffer. In other words, there may be blind spots. Note that
+this option may not work with thread that rely on signals.
+.TP
+.B --system-wide
+Create a system wide monitoring session where pfmon measures all threads running
+on a set of processors. By default this option is turned off,
+i.e., pfmon operates in per-thread mode. By default, system-wide mode measures
+the same events on all available processors. Available processors may depend
+on the CPU-set pfmon is executed in.  It is possible to restrict to a
+subset of processor using the \fB--cpu-list\fR option. 
+.TP
+.B --smpl-outfile=filename
+Save profiles into the file called \fBfilename\fR. By default, profiles are
+printed on the terminal.
+.TP
+.B --long-smpl-periods=val1,val2,...
+Set the long sampling period to reload into the overflowed counter(s) after a
+buffer full notification.  The values must be passed in the same order as
+the events they refer to. For instance, if the events are passed as \fB-eev1,ev2\fR
+then the sampling periods for \fBev1\fR must be the first, followed by the period for
+\fBev2\fR.  It is possible to skip a period, by providing an empty element in the list,
+e.g., \fB--long-smpl-periods=,val2\fR. Sampling periods are expressed in the
+same unit as the event they refer to. If an event counts the number of
+instructions retired, then the sampling period is using the same unit, i.e.,
+instructions retired. To sample every 100,000 instructions, you can pass
+\fB--long-smpl-periods=100000\fR. If this option is not set
+but \fB--short-smpl-periods\fR is set, then the short reset values are used
+for both periods and vice-versa.
+.TP
+.B --short-smpl-periods=val1,val2,...
+Set the short sampling to reload into the overflowed counter(s) after a sample
+is recorded into the buffer and the buffer does not become full. The option
+functions exactly like \fB--long-smpl-periods\fR. If this option is not set
+but \fB--long-smpl-periods\fR is set, then the long reset values are used
+for both periods and vice-versa.
+is 
+.TP
+.B --smpl-entries=n
+Selects the number of samples that the kernel sampling buffer can hold.
+The default size is determined dynamically by pfmon based on the size
+of a sample and system resource limits such as the amount of locked
+memory allowed for a user process (as reported by ulimit). When this
+resource limit is set to unlimited then pfmon uses 2048 entries.
+.TP
+.B --with-header
+Generates a header before printing counts or profiles. The header contains
+information about the configuration of the host system and about the measurement.
+.TP
+.B --cpu-list=num,num1-num2,...
+For system-wide mode, this option specifies the list of processors to monitor.
+Without this option, all available processors are monitored. Processors can
+be specified individually with their index, or by range. Pfmon takes into account
+CPU-sets, so cpu identification must be relative to the set.
+.TP
+.B --aggregate-results
+Aggregate counts and profiles output. By default, this option is off meaning
+that results are per-thread or per-CPU. This option may not be supported by
+all sampling modules.
+.TP
+.B --trigger-code-start-address=addr
+Start monitoring the first time code executes at address \fBaddr\fR. The address 
+can be specified in hexadecimal or with a symbolic name. This option is not supported
+in system-wide mode.
+.TP
+.B --trigger-code-stop-address=addr
+Stop monitoring the first time code executes at address \fBaddr\fR. The address
+can be specified in hexadecimal or with a symbolic name. This option is not supported
+in system-wide mode.
+.TP
+.B --trigger-data-start-address=addr
+Start monitoring when the data address at address \fBaddr\fR is accessed. By default,
+this is for any read or write access. This option may not be supported on all processors. This option is not supported
+in system-wide mode.
+.TP
+.B --trigger-data-stop-address=addr
+Stop monitoring when data address at address \fBaddr\fR is accessed. By default,
+this is for any read of write access. This option may not be supported on all processors. This option is not supported
+in system-wide mode.
+.TP
+.B --trigger-code-repeat
+By default, the start and stop code triggers are activated  only the first time they are
+reached. With this option, it is possible to repeat the start/stop behavior
+each time the execution crosses the trigger address. This option is not supported
+in system-wide mode.
+.TP
+.B --trigger-code-follow
+Apply the start/stop code triggers to all monitored threads. By default,
+triggers are only applied to the first thread. This option has no effect
+on system-wide measurements.
+.TP
+.B --trigger-data-repeat
+By default, the start and stop data triggers are activated  only the first time they are
+reached. With this option, it is possible to repeat the start/stop behavior
+each time the data address is accessed. This option has no effect
+on system-wide measurements.
+.TP
+.B --trigger-data-follow
+Apply the start/stop data triggers to all monitored threads. By default,
+triggers are only applied to the first thread. This option has no effect
+on system-wide measurements.
+.TP
+.B --trigger-data-ro
+Data trigger are activated on read access only. By default, they are activated
+on read or write access. This option may not be supported on all processors.
+This option is not supported in system-wide mode.
+.TP
+.B --trigger-data-wo
+Data trigger activated on write access only. By default, they are activated on
+read or write access. This option may not be supported on all processors.
+This option is not supported in system-wide mode.
+.TP
+.B --trigger-start-delay=secs
+Number of seconds before activating monitoring. By default, monitoring is
+activated immediately, except when code/data triggers are used.
+.TP
+.B --priv-levels=lvl1,lvl2,...
+Set privilege level per event. The levels apply to the current set, i.e. the
+last \fB-e\fR option. The levels are specified in the same order as the events.
+Accepted values for privileges are: u, k, 0, 1, 2, 3 or any combinations
+thereof.
+.TP
+.B --us-counter-format
+Print counts using commas, e.g., 1,024.
+.TP
+.B --eu-counter-format
+Print count using points, e.g., 1.024.
+.TP
+.B --hex-counter-format
+Print count using hexadecimal, e.g., 0x400.
+.TP
+.B --smpl-module=name
+Select the sampling module. By default the first module that matches the
+PMU model is used. This is typically the detailed-* module. To figure out
+which modules are supports, use the \fB-I\fR option.
+.TP
+.B --show-time
+Show real,user, and system time for the command executed in per-thread mode.
+.TP
+.B --symbol-file=filename
+ELF image containing the symbol table for the command being monitored. 
+By default, pfmon uses the binary image on disk. 
+.TP
+.B --check-events-only
+Verify combination of events and exit. No measurement is performed.
+.TP
+.B --smpl-periods-random=mask1:seed1,...
+Apply randomization to long and short periods. For each period, a seed and
+a mask value must be passed. The mask is a bitmask representing the range of
+variation for randomization. As of perfmon v2.3, the seed value is now ignored.
+.TP
+.B --smpl-print-counts
+When sampling, the final counts for the counters are not printed by default.
+This option forces counts to be printed at the end of a sampling measurement.
+.TP
+.B --attach-task pid
+Attach to thread identified by \fBpid\fR that is already running. User must have
+permission to attach to the thread. The \fBpid\fR really refers to the kernel
+thread identification (tid). When attaching to a multi-threaded program, only
+the designated thread is monitored, unless the \fB--follow-pthread\fR is also
+specified. In that case, all threads will be monitored, along with any newly
+created thread thereafter.
+.TP
+.B --reset-non-smpl-periods[=a,b-c,..]
+At the end of a sampling period, reset PMD registers non used as sampling periods.
+When no parameter is passed to this option, all non sampling PMD registers are
+reset. Otherwise, the list of specified registers is reset. For instance,
+if the list is 0,4-6, then registers 0, 4, 5, 6 will be reset when any counter
+overflows.
+
+.TP
+.B --follow-fork
+Monitoring continues across fork(). By default monitoring is not propagated to
+child processes. This option has no effect in system-wide mode.
+.TP
+.B --follow-vfork
+Monitoring continues across vfork(). By default monitoring is not propagated to
+child processes. This option has no effect in system-wide mode.
+.TP
+.B --follow-pthread
+Monitoring continues across pthread_create(). When attaching to a thread in a multi-threaded
+process, only the designated thread is monitored. However, if this option is specified
+with \fB--attach-task\fR, all other threads will also be monitored along with any newly
+created thread thereafter. This option has no effect in system-wide mode.
+.TP
+.B --follow-exec[=pattern]
+Monitoring follows through the exec*() system call. By default monitoring stops at
+exec*(). It is possible to specify a regular expression pattern to filter out
+which command gets monitored. Without the pattern all commands are monitored.
+.TP
+.B --follow-exec-exclude=pattern
+Monitoring follows through the exec*() system call. By default monitoring stops
+at exec*(). This option is the counter-part of \fB--follow-exec\fR in that
+the pattern specifies the command which must be excluded from monitoring.
+Depending on the monitored workload, it may be easier to specify the commands to
+excludes rather than the commands to include.
+.TP
+.B --follow-all
+This option is equivalent to specifying all of --follow-fork, --follow-vfork,
+--follow-pthreads, --follow-exec.
+.TP
+.B --no-cmd-output
+Redirect all output of executed commands to /dev/null.
+.TP
+.B --exec-split-results
+Generate separate results output for execution before and after exec*(). 
+.TP
+.B --resolve-addresses
+Resolve all code/data addresses in profiles using symbol table information.
+If the symbol information is not present, the raw address is printed. By
+default, only raw addresses are printed.
+.TP
+.B --extra-smpl-pmds=num,num1-num2,...
+Specify a list of extra PMD registers to include in samples. Those PMD registers
+are typically non counting PMD registers.
+.TP
+.B --saturate-smpl-buffer
+Stop collecting samples the first time the sampling buffer becomes full. In
+other words, simply collect the first N entries when \fB--smpl-entries=N\fR.
+By default, this option is off.
+.TP
+.B --pin-command
+Pin executed command on the CPUs specified by --cpu-list. This option is only
+relavant in system-wide mode.
+.TP
+.B --switch-timeout=milliseconds
+The number of milliseconds before switching from one event set to the next.
+Depending on the granularity of the underlying operating system timer,
+the timeout may be rounded up. If the difference with the user provided timeout
+exeeds 2%, pfmon prints a warning message.
+.TP
+.B --dont-start
+Do not activate monitoring. This option is useful on architectures where 
+it is possible to start/stop counters directly from the user level.
+.TP
+.B --cpu-set-relative
+With this option, CPU identifications for \fB--cpu--list\fR are relative to
+CPU-set affinity. By default, they are relative to actual CPU0.
+.TP
+.B --print-interval=msecs
+With this option, intermediate results can be generated when counting in a
+system-wide session. Pfmon prints the delta for each event since the last
+print. The interval is expressed in milliseconds. This option is not
+supported in per-thread mode. No total counts are printed at the end.
+.TP
+.B --smpl-per-function
+For sampling modules which produce an histogram, aggregate samples per
+function as opposed to per sample address which is the default.
+.TP
+.B --smpl-ignore-pids
+In system-wide sampling, there is currently no symbol correlation possible.
+However, many formats do print the program name and thread identification
+for each sample. With other formats, e.g., pebs, such output is not possible
+and to ensure users are aware of the problem, pfmon fails unless this option
+is passed. It is ignored in all other situations.
+.TP
+.B --smpl-show-top=n
+When sampling, only show the top \fBn\fR samples. The default is to show
+all samples. This option can be combined with \fB--smpl-cum-thres\fR, in
+which case, output stops when one of the two limits is reached.
+.TP
+.B --smpl-cum-thres=p
+When sampling, only show the samples up to the point where the cumulative
+number of samples reaches \fBp\fR percent. The \fBp\fR argument must be
+between 1 and 100. By default all samples are shown. This option can be
+combined with \fB--smpl-show-top\fR in which case, output stops when one
+of the two limits is reached.
+.TP
+.B --smpl-eager-save
+By default when sampling in per-thread mode, pfmon waits until the last
+thread terminates before processing the samples to produce the final 
+profiles. The motivation is to avoid introducing noise while the measurement
+is running. However, this can incur high pressure on system resources such as
+memory and file descriptors. This option causes profiles to be generated when
+a thread session terminates, thereby potentially minimizing the amount of
+system resources used.
+.TP
+.B --smpl-compact
+This option can be used when sampling. It indicates that the sampling module
+specified via \fB--smpl-module\fR, or the default module, must print samples
+in ASCII text with one sample per line and all values in numerical form.
+The meaning of each column can be obtained using the \fB--with-header\fR
+option.
+.TP
+.B --smpl-raw
+This option can be used when sampling. It indicates that the sampling module
+specified via \fB--smpl-module\fR, or the default module, must save the samples
+in binary form, as they are laid out in the sampling buffer. The buffer header
+is not saved. In the case of the \fBinst-hist\fR module (default sampling module),
+if each sample is composed of more than just the header, PMD values followning it
+are saved in the order in which the corresponding events were specified on the
+command line. For instance, if pfmon was invoked to sample on EV1 and record values
+of EV2 and EV3, then the first 64-bit value following the sample header is the
+value of EV2, then that of EV3.
+.TP
+
+.SH SPECIAL CONTROLS
+It is possible to cleanly stop pfmon from outside by sending the SIGTERM
+signal to the process. Results will be collected and saved according to
+command line options.
+
+.SH SEE ALSO
+Visit \fBhttp://perfmon2.sf.net\fR for more detailed documentation including
+processor specific options.
+
+.SH AUTHOR
+Stephane Eranian <eranian@gmail.com>
+.PP

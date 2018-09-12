@@ -1,0 +1,6 @@
+
+ERRO: O programa trava devido a inconsistencia do envio da mensagem.
+
+SOLUCAO: Verifique o parametro TAG. O processo que recebe nao
+         identifica corretamente o rotulo do processo que envia
+         e vice-e-versa.

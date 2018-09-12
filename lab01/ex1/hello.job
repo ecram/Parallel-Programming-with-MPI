@@ -1,0 +1,16 @@
+#PBS -q paralela
+#PBS -N hello
+#PBS -V
+#PBS -l nodes=12:ppn=4
+#!/bin/sh
+cd $PBS_O_WORKDIR
+echo "-----------------------------------------"
+echo "Inicio do job:" `date`
+echo "Hostname: " `hostname`
+echo "PWD: " $PWD
+echo "Arquivos:"
+#mpirun -rmk pbs ./a.out
+mpirun ./a.out
+echo "Final do job:" `date`
+echo "-----------------------------------------"
+

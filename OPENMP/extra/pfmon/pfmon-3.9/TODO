@@ -1,0 +1,5 @@
+TODO list:
+----------
+	- symbol resolution in follow-exec mode
+	- use libunwind for dynamic stop triggers
+	- add P6/Pentium M, AMD X86-64 documentation

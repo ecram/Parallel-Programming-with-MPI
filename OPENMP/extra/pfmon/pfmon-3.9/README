@@ -1,0 +1,96 @@
+            ------------------------------------------------------
+                                   pfmon-3.9:
+	            a tool to monitor performance on Linux
+            ------------------------------------------------------
+ 	 Copyright (c) 2001-2007 Hewlett-Packard Development Company, L.P.
+	            Stephane Eranian <eranian@hpl.hp.com>
+
+This package provides a tool, called pfmon, which monitors performance
+on unmodified binaries or for an entire system. On each supported processor,
+it exploits the Performance Monitoring Unit (PMU) which implements the hardware performance
+counters. This package uses the perfmon2 kernel support interface to access the
+PMU and the libpfm library.
+
+This version of pfmon supports the following processors:
+	- For Intel IA-64:
+		Itanium (Merced), Itanium 2 (McKinley, Madison, Deerfield),
+		Itanium 2 9000/9100 (Montecito, Montvale) and Generic
+	- For AMD X86:
+		AMD Opteron (K8, fam 10h)
+	- For Intel X86: 
+		Intel P6 (Pentium II, Pentium Pro, Pentium III, Pentium M)
+		Intel Yonah (Core Duo/Core Solo),
+		Intel Netburst (Pentium 4, Xeon)
+		Intel Core (Merom, Penryn, Dunnington) Core 2 and Quad
+		Intel Atom
+		Intel Nehalem
+		Intel architectural perfmon v1, v2, v3
+	- For MIPS:
+		5K, 20K, 25KF, 34K, 5KC, 74K, R10000, R12000, RM7000, RM9000,
+		SB1, VR5432, VR5500, SiCortex ICA9A/ICE9B
+	- For Sun:
+		 Sparc: Ultra12, Ultra3, Ultra3i, Ultra3Plus, Ultra4Plus,
+		 Sparc: Niagara1, Niagara2
+
+REQUIREMENTS
+------------
+
+         - For all architectures, you must use a 2.6.x kernels.
+	   For IA-64, it can be any 2.6.x kernels but preferrably above 2.6.5,
+	   and it can implement either perfmon2 v2.0 or v2.2 or higher.
+
+	   For all other architectures, the kernel must implement perfmon2 v2.8
+	   Note that v2.2 or higher is currrently available as a kernel patch from:
+
+	   	http://perfmon2.sf.net/
+
+	 - you need libpfm-3.7 or more recent.
+	   The is available from:
+	   	http://perfmon2.sf.net/
+
+	 - you need the libelf development package or equivalent such as
+	   elfutils-devel depending on your Linux distribution.
+
+	 - if you want pfmon crash dump support you need to download libunwind.
+	   You can download this library from the following site: 
+	   http://savannah.nongnu.org/projects/libunwind
+
+WHAT'S THERE
+-------------
+
+	- the pfmon tool (pfmon directory) which collects performance data on 
+	  unmodified binaries or for the entire system (UP & SMP).
+
+	- a small set of test programs (tests directory) including pfdbg to 
+	  turn on/off kernel perfmon2 debugging. 
+
+	- a small man pages. More extensive documentation is available on
+	  the web site.
+
+INSTALLATION
+------------
+
+	- you must have the libpfm-3.7 package already installed. At a minimum,
+	  the runtime package. You need the development package to compile pfmon.
+
+	- edit config.mk to :
+
+	  - update some config variables to suit your installation, in particular
+	    where to find the libpfm headers and library. If you are testing
+	    perfmon3 then you need to enable CONFIG_PFMON_PFMV3.
+
+	  - if you have libunwind and want call stack dumping on pfmon crash,
+	    say 'y' for CONFIG_PFMON_LIBUNWIND
+
+	  - select your compiler options
+
+	- type make
+
+	- type make install
+
+	- you're done, type pfmon --help for a list of options
+
+DOCUMENTATION
+-------------
+	- More up to date information can be found on pfmon web site: 
+	  http://perfmon2.sf.net/

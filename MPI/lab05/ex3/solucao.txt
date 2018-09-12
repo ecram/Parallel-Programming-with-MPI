@@ -1,0 +1,2 @@
+
+SOLUCAO: Inserir as rotinas de inicializacao e finalizacao do mpi

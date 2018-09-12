@@ -1,0 +1,2 @@
+gcc -fopenmp -c omp_hello.c -I/usr/local/openmp_intel
+gcc -liomp5 -lpthread -L/usr/local/openmp_intel omp_hello.o -o omp_hello_intel

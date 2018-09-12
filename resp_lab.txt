@@ -1,0 +1,54 @@
+Lab01
+
+Resp. ex1:
+
+$ mpicc hello.c -o hello
+
+$ mpirun.mpich -np 8 ./hello
+
+Resp. ex2:
+
+$ mpicc hello.ex1s.c -o hello2
+
+$ mpirun.mpich -np 16 ./hello2
+
+Resp. ex3:
+
+$ mpicc hello.ex2s.c -o hello3
+
+$ mpirun.mpich -np 5 ./hello3
+
+Resp. ex4:
+
+$ mpicc mpi.ex1s.c -o vetor
+$ mpirun.mpich -np 6 ./vetor
+
+Resp. ex5:
+
+$ mpicc pai.c -o pai
+$ mpicc filho.c -o filho
+
+$ mpirun.mpich -np 1 ./pai : -np 8 ./filho
+
+Resp. ex6:
+
+$ mpicc karp.mpi.c -o pi
+
+$ mpirun.mpich -np 6 ./pi
+
+Lab02
+
+Resp. ex1:
+
+$ mpicc blocksends.c -o bks
+
+$ mpirun.mpich -np 2 ./bks
+
+Resp. ex2:
+
+Lab03
+
+$ mpicc solucao.c -o solucao -lm
+
+$ mpirun.mpich -np 8 ./solucao
+

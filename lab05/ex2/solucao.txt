@@ -1,0 +1,3 @@
+
+
+SOLUCAO: O Datatype da mensagem enviada nao esta de acordo com o Datatype da mensagem recebida

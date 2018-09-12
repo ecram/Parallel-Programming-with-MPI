@@ -1,0 +1,37 @@
+        -:    0:Source:teste02.c
+        -:    0:Graph:teste02.gcno
+        -:    0:Data:teste02.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <omp.h>
+        -:    4:
+        -:    5:
+function foo called 1 returned 100% blocks executed 100%
+        1:    6:float foo(float *A, int n){
+        1:    7:	int i=0;
+        1:    8:	float x = 0;
+        -:    9:	#pragma GCC ivdep
+     1001:   10:	for (i=0; i<n; i++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+     1000:   11:		x+=A[i];
+        -:   12:	}
+        1:   13:	return x;
+        -:   14:}
+        -:   15:#define SIZE 1000
+function main called 1 returned 100% blocks executed 100%
+        1:   16:int main(){
+        1:   17:	float *x=malloc(sizeof(float)*SIZE);
+        -:   18:	int cont;
+        -:   19:	#pragma GCC ivdep
+        1:   20:	for( cont=0;cont<SIZE;cont++) x[cont]=cont*cont;
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+        1:   21:	printf("%f\n",foo(x,SIZE));
+call    0 returned 100%
+call    1 returned 100%
+        1:   22:	free(x); x=NULL;
+        1:   23:	return 0;
+        -:   24:}

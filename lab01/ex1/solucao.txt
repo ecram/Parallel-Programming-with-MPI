@@ -1,0 +1,8 @@
+1. Primeiro executar para compilar o arquivo. Não esquecer de analisar que significa cada linha.
+
+$ mpicc hello.c -o hello
+
+2. Segundo, executar quantas vezes seja nesario.
+
+$ mpiexec -np 8 ./hello
+

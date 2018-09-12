@@ -1,0 +1,502 @@
+31'May'16 11:31:23     | MPITune started at  31 May'16 (Tuesday) 14:31:23
+31'May'16 11:31:23     | MPITune has been started by: root
+31'May'16 11:31:23     | Preparing tuner's components...
+31'May'16 11:31:23     | Initialization of signals handlers...
+31'May'16 11:31:23     | Start catching signal with code 15 (SIGTERM) ...
+31'May'16 11:31:23     | Success.
+31'May'16 11:31:23     | Start catching signal with code 2 (SIGINT) ...
+31'May'16 11:31:23     | Success.
+31'May'16 11:31:23     | Initialization of signals handlers completed.
+31'May'16 11:31:23     | Obtained following information about Intel(R) MPI Library:
+MPI Root   : /usr/local/intel2016/compilers_and_libraries_2016.3.210/linux/mpi
+MPI Bin    : /usr/local/intel2016/compilers_and_libraries_2016.3.210/linux/mpi/intel64/bin
+MPI Version: 5.1.3
+MPI Build  : 20160120
+mpiexec    : /usr/local/intel2016/compilers_and_libraries_2016.3.210/linux/mpi/intel64/bin/mpiexec.hydra
+31'May'16 11:31:23 INF | Amount of RAM obtained for host: 1831 MB
+31'May'16 11:31:23 WRN | Amount of RAM is less than 2 GB and greater or equal than 1GB per core. Maximum message's size will be cut down to 2MB (if message sizes not defined by user)
+31'May'16 11:31:23 WRN | Amount of availiable RAM is less than recommended. Values of tuning will probably not be the best.
+31'May'16 11:31:23     | Range of availiable precisions for current launch is [1;2097153].
+31'May'16 11:31:23     | Current precision is 23.
+31'May'16 11:31:23 INF | Precision has not been changed by passed arguments. @range_file() macros will work as usual.
+31'May'16 11:31:23     | Current devices dictionary:
+{
+	'ssm' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'Combined sockets + shared memory (for clusters with SMP nodes)', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shared[\\s]+memory[\\s]+and[\\s]+socket[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'rdssm' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'Combined sockets + shared memory + DAPL* (for clusters with SMP nodes and RDMA-capable network fabrics)', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+RDMA,[\\s]+shared[\\s]+memory,[\\s]+and[\\s]+socket[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'rdma' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'RDMA-capable network fabrics including InfiniBand*, Myrinet* (via DAPL*)', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+RDMA[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'shm' : '{'perhostmin': -1, 'hostmin': 1, 'title': 'Shared-memory only (no sockets)', 'device': '', 'hostmax': 1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shared[\\s]+memory[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'sock' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'Sockets', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+socket[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+}
+31'May'16 11:31:23     | Current fabrics dictionary:
+{
+	'shm:dapl' : '{'perhostmin': -1, 'fabric': '', 'title': 'Remote direct access and shared memory', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+dapl[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'ofa' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+ofa[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'shm:ofa' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+ofa[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'shm:tcp' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+tcp[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'dapl' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+dapl[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'tcp' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+tcp[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'shm:tmi' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+tmi[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'tmi' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+tmi[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'shm' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': 1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': 1}'
+}
+31'May'16 11:31:23     | Checking for devices...
+31'May'16 11:31:23     | Device 'ssm' passed checking successfully.
+31'May'16 11:31:44     | Device 'rdssm' didn't pass the check and was removed from queue.
+31'May'16 11:32:04     | Device 'rdma' didn't pass the check and was removed from queue.
+31'May'16 11:32:05     | Device 'shm' passed checking successfully.
+31'May'16 11:32:05     | Device 'sock' passed checking successfully.
+31'May'16 11:32:25     | Fabric 'shm:dapl' didn't pass the check and was removed from queue.
+31'May'16 11:32:46     | Fabric 'ofa' didn't pass the check and was removed from queue.
+31'May'16 11:33:07     | Fabric 'shm:ofa' didn't pass the check and was removed from queue.
+31'May'16 11:33:07     | Fabric 'shm:tcp' passed checking successfully.
+31'May'16 11:33:27     | Fabric 'dapl' didn't pass the check and was removed from queue.
+31'May'16 11:33:28     | Fabric 'tcp' passed checking successfully.
+31'May'16 11:33:58     | Fabric 'shm:tmi' didn't pass the check and was removed from queue.
+31'May'16 11:34:28     | Fabric 'tmi' didn't pass the check and was removed from queue.
+31'May'16 11:34:29     | Fabric 'shm' passed checking successfully.
+31'May'16 11:34:29     | No invalid command line options detected.
+31'May'16 11:34:29     | Default devices list (from devices.xml):
+{
+	'rdma' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'RDMA-capable network fabrics including InfiniBand*, Myrinet* (via DAPL*)', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+RDMA[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'rdssm' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'Combined sockets + shared memory + DAPL* (for clusters with SMP nodes and RDMA-capable network fabrics)', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+RDMA,[\\s]+shared[\\s]+memory,[\\s]+and[\\s]+socket[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'shm' : '{'perhostmin': -1, 'hostmin': 1, 'title': 'Shared-memory only (no sockets)', 'device': '', 'hostmax': 1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shared[\\s]+memory[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'sock' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'Sockets', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+socket[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'ssm' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'Combined sockets + shared memory (for clusters with SMP nodes)', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shared[\\s]+memory[\\s]+and[\\s]+socket[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+}
+31'May'16 11:34:29     | List of using devices:
+{
+	'shm' : '{'perhostmin': -1, 'hostmin': 1, 'title': 'Shared-memory only (no sockets)', 'device': '', 'hostmax': 1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shared[\\s]+memory[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'sock' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'Sockets', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+socket[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+	'ssm' : '{'perhostmin': -1, 'hostmin': -1, 'title': 'Combined sockets + shared memory (for clusters with SMP nodes)', 'device': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shared[\\s]+memory[\\s]+and[\\s]+socket[\\s]+data[\\s]+transfer[\\s]+mode)+'}'
+}
+31'May'16 11:34:29     | Default fabrics list (from fabrics.xml):
+{
+	'dapl' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+dapl[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'ofa' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+ofa[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'shm' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': 1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': 1}'
+	'shm:dapl' : '{'perhostmin': -1, 'fabric': '', 'title': 'Remote direct access and shared memory', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+dapl[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'shm:ofa' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+ofa[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'shm:tcp' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+tcp[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'shm:tmi' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+tmi[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'tcp' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+tcp[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'tmi' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+tmi[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+}
+31'May'16 11:34:29     | List of using fabrics:
+{
+	'shm' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': 1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': 1}'
+	'shm:tcp' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+tcp[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+	'tcp' : '{'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+tcp[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}'
+}
+31'May'16 11:34:29     | Prepare tuner's components completed
+31'May'16 11:34:29     | Generating tasks list...
+31'May'16 11:34:29     | Devices for tuning:
+{
+	'shm:tcp' : '[1, {'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+and[\\s]+tcp[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}]'
+	'shm' : '[1, {'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': 1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+shm[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': 1}]'
+	'tcp' : '[1, {'perhostmin': -1, 'fabric': '', 'title': '', 'hostmax': -1, 'perhostmax': -1, 'chkre': '.*(MPI[\\s]+startup\\(\\)\\:[\\s]+tcp[\\s]+data[\\s]+transfer[\\s]+mode)+', 'hostmin': -1}]'
+}
+31'May'16 11:34:29     | Generating tasks list completed.
+31'May'16 11:34:29     | Check ability to tune required options...
+31'May'16 11:34:29     | Filtering was skipped due to 'cluster-specific' mode without changing benchmark.'
+31'May'16 11:34:29     | Checking of ability to tune required options has been completed.
+31'May'16 11:34:29     | Set monopoly access for options to be tuned...
+31'May'16 11:34:29     | Skipped. Availiable only for application-specific mode.
+31'May'16 11:34:29     | Current schedule:
+--------------------------------------------------------------------------------
+ # | H | PH | PRC | Fabric |           Option          |     Test          | S |
+--------------------------------------------------------------------------------
+  1|  8|   4|   32|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+  2|  8|   4|   32|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+  3|  8|   2|   16|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+  4|  8|   2|   16|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+  5|  8|   1|    8|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+  6|  8|   1|    8|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+  7|  4|   4|   16|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+  8|  4|   4|   16|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+  9|  4|   2|    8|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 10|  4|   2|    8|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 11|  4|   1|    4|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 12|  4|   1|    4|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 13|  2|   4|    8|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 14|  2|   4|    8|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 15|  2|   2|    4|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 16|  2|   2|    4|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 17|  2|   1|    2|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 18|  2|   1|    2|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 19|  2|   1|    2|..shm:tc|I_MPI_EAGER_THRESHOLD      |IMB Sendrecv       | - |
+ 20|  1|   4|    4|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 21|  1|   4|    4|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 22|  1|   2|    2|..shm:tc|I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 23|  1|   2|    2|..shm:tc|I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 24|  1|   2|    2|..shm:tc|..INTRANODE_EAGER_THRESHOLD|IMB Sendrecv       | - |
+ 25|  1|   4|    4|..shm', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 26|  1|   4|    4|..shm', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 27|  1|   2|    2|..shm', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 28|  1|   2|    2|..shm', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 29|  1|   2|    2|..shm', |..INTRANODE_EAGER_THRESHOLD|IMB Sendrecv       | - |
+ 30|  8|   4|   32|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 31|  8|   4|   32|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 32|  8|   2|   16|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 33|  8|   2|   16|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 34|  8|   1|    8|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 35|  8|   1|    8|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 36|  4|   4|   16|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 37|  4|   4|   16|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 38|  4|   2|    8|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 39|  4|   2|    8|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 40|  4|   1|    4|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 41|  4|   1|    4|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 42|  2|   4|    8|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 43|  2|   4|    8|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 44|  2|   2|    4|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 45|  2|   2|    4|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 46|  2|   1|    2|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 47|  2|   1|    2|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 48|  2|   1|    2|..tcp', |I_MPI_EAGER_THRESHOLD      |IMB Sendrecv       | - |
+ 49|  1|   4|    4|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 50|  1|   4|    4|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 51|  1|   2|    2|..tcp', |I_MPI_DYNAMIC_CONNECTION   |IMB Sendrecv       | - |
+ 52|  1|   2|    2|..tcp', |I_MPI_WAIT_MODE            |IMB Sendrecv       | - |
+ 53|  1|   2|    2|..tcp', |..INTRANODE_EAGER_THRESHOLD|IMB Sendrecv       | - |
+ 54|  8|   4|   32|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+ 55|  8|   4|   32|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+ 56|  8|   4|   32|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+ 57|  8|   4|   32|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+ 58|  8|   4|   32|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+ 59|  8|   4|   32|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+ 60|  8|   4|   32|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+ 61|  8|   4|   32|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+ 62|  8|   4|   32|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+ 63|  8|   4|   32|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+ 64|  8|   4|   32|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+ 65|  8|   4|   32|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+ 66|  8|   4|   32|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+ 67|  8|   2|   16|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+ 68|  8|   2|   16|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+ 69|  8|   2|   16|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+ 70|  8|   2|   16|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+ 71|  8|   2|   16|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+ 72|  8|   2|   16|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+ 73|  8|   2|   16|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+ 74|  8|   2|   16|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+ 75|  8|   2|   16|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+ 76|  8|   2|   16|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+ 77|  8|   2|   16|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+ 78|  8|   2|   16|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+ 79|  8|   2|   16|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+ 80|  8|   1|    8|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+ 81|  8|   1|    8|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+ 82|  8|   1|    8|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+ 83|  8|   1|    8|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+ 84|  8|   1|    8|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+ 85|  8|   1|    8|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+ 86|  8|   1|    8|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+ 87|  8|   1|    8|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+ 88|  8|   1|    8|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+ 89|  8|   1|    8|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+ 90|  8|   1|    8|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+ 91|  8|   1|    8|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+ 92|  8|   1|    8|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+ 93|  4|   4|   16|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+ 94|  4|   4|   16|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+ 95|  4|   4|   16|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+ 96|  4|   4|   16|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+ 97|  4|   4|   16|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+ 98|  4|   4|   16|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+ 99|  4|   4|   16|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+100|  4|   4|   16|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+101|  4|   4|   16|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+102|  4|   4|   16|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+103|  4|   4|   16|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+104|  4|   4|   16|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+105|  4|   4|   16|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+106|  4|   2|    8|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+107|  4|   2|    8|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+108|  4|   2|    8|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+109|  4|   2|    8|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+110|  4|   2|    8|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+111|  4|   2|    8|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+112|  4|   2|    8|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+113|  4|   2|    8|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+114|  4|   2|    8|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+115|  4|   2|    8|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+116|  4|   2|    8|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+117|  4|   2|    8|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+118|  4|   2|    8|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+119|  4|   1|    4|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+120|  4|   1|    4|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+121|  4|   1|    4|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+122|  4|   1|    4|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+123|  4|   1|    4|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+124|  4|   1|    4|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+125|  4|   1|    4|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+126|  4|   1|    4|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+127|  4|   1|    4|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+128|  4|   1|    4|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+129|  4|   1|    4|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+130|  4|   1|    4|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+131|  4|   1|    4|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+132|  2|   4|    8|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+133|  2|   4|    8|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+134|  2|   4|    8|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+135|  2|   4|    8|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+136|  2|   4|    8|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+137|  2|   4|    8|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+138|  2|   4|    8|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+139|  2|   4|    8|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+140|  2|   4|    8|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+141|  2|   4|    8|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+142|  2|   4|    8|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+143|  2|   4|    8|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+144|  2|   4|    8|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+145|  2|   2|    4|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+146|  2|   2|    4|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+147|  2|   2|    4|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+148|  2|   2|    4|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+149|  2|   2|    4|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+150|  2|   2|    4|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+151|  2|   2|    4|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+152|  2|   2|    4|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+153|  2|   2|    4|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+154|  2|   2|    4|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+155|  2|   2|    4|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+156|  2|   2|    4|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+157|  2|   2|    4|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+158|  2|   1|    2|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+159|  2|   1|    2|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+160|  2|   1|    2|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+161|  2|   1|    2|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+162|  2|   1|    2|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+163|  2|   1|    2|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+164|  2|   1|    2|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+165|  2|   1|    2|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+166|  2|   1|    2|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+167|  2|   1|    2|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+168|  2|   1|    2|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+169|  2|   1|    2|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+170|  2|   1|    2|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+171|  1|   4|    4|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+172|  1|   4|    4|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+173|  1|   4|    4|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+174|  1|   4|    4|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+175|  1|   4|    4|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+176|  1|   4|    4|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+177|  1|   4|    4|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+178|  1|   4|    4|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+179|  1|   4|    4|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+180|  1|   4|    4|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+181|  1|   4|    4|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+182|  1|   4|    4|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+183|  1|   4|    4|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+184|  1|   2|    2|..shm:tc|I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+185|  1|   2|    2|..shm:tc|I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+186|  1|   2|    2|..shm:tc|I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+187|  1|   2|    2|..shm:tc|I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+188|  1|   2|    2|..shm:tc|I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+189|  1|   2|    2|..shm:tc|I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+190|  1|   2|    2|..shm:tc|I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+191|  1|   2|    2|..shm:tc|I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+192|  1|   2|    2|..shm:tc|I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+193|  1|   2|    2|..shm:tc|I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+194|  1|   2|    2|..shm:tc|I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+195|  1|   2|    2|..shm:tc|I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+196|  1|   2|    2|..shm:tc|I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+197|  1|   4|    4|..shm', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+198|  1|   4|    4|..shm', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+199|  1|   4|    4|..shm', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+200|  1|   4|    4|..shm', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+201|  1|   4|    4|..shm', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+202|  1|   4|    4|..shm', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+203|  1|   4|    4|..shm', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+204|  1|   4|    4|..shm', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+205|  1|   4|    4|..shm', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+206|  1|   4|    4|..shm', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+207|  1|   4|    4|..shm', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+208|  1|   4|    4|..shm', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+209|  1|   4|    4|..shm', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+210|  1|   2|    2|..shm', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+211|  1|   2|    2|..shm', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+212|  1|   2|    2|..shm', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+213|  1|   2|    2|..shm', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+214|  1|   2|    2|..shm', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+215|  1|   2|    2|..shm', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+216|  1|   2|    2|..shm', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+217|  1|   2|    2|..shm', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+218|  1|   2|    2|..shm', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+219|  1|   2|    2|..shm', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+220|  1|   2|    2|..shm', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+221|  1|   2|    2|..shm', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+222|  1|   2|    2|..shm', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+223|  8|   4|   32|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+224|  8|   4|   32|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+225|  8|   4|   32|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+226|  8|   4|   32|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+227|  8|   4|   32|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+228|  8|   4|   32|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+229|  8|   4|   32|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+230|  8|   4|   32|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+231|  8|   4|   32|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+232|  8|   4|   32|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+233|  8|   4|   32|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+234|  8|   4|   32|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+235|  8|   4|   32|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+236|  8|   2|   16|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+237|  8|   2|   16|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+238|  8|   2|   16|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+239|  8|   2|   16|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+240|  8|   2|   16|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+241|  8|   2|   16|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+242|  8|   2|   16|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+243|  8|   2|   16|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+244|  8|   2|   16|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+245|  8|   2|   16|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+246|  8|   2|   16|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+247|  8|   2|   16|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+248|  8|   2|   16|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+249|  8|   1|    8|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+250|  8|   1|    8|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+251|  8|   1|    8|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+252|  8|   1|    8|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+253|  8|   1|    8|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+254|  8|   1|    8|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+255|  8|   1|    8|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+256|  8|   1|    8|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+257|  8|   1|    8|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+258|  8|   1|    8|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+259|  8|   1|    8|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+260|  8|   1|    8|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+261|  8|   1|    8|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+262|  4|   4|   16|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+263|  4|   4|   16|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+264|  4|   4|   16|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+265|  4|   4|   16|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+266|  4|   4|   16|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+267|  4|   4|   16|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+268|  4|   4|   16|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+269|  4|   4|   16|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+270|  4|   4|   16|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+271|  4|   4|   16|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+272|  4|   4|   16|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+273|  4|   4|   16|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+274|  4|   4|   16|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+275|  4|   2|    8|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+276|  4|   2|    8|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+277|  4|   2|    8|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+278|  4|   2|    8|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+279|  4|   2|    8|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+280|  4|   2|    8|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+281|  4|   2|    8|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+282|  4|   2|    8|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+283|  4|   2|    8|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+284|  4|   2|    8|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+285|  4|   2|    8|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+286|  4|   2|    8|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+287|  4|   2|    8|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+288|  4|   1|    4|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+289|  4|   1|    4|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+290|  4|   1|    4|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+291|  4|   1|    4|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+292|  4|   1|    4|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+293|  4|   1|    4|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+294|  4|   1|    4|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+295|  4|   1|    4|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+296|  4|   1|    4|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+297|  4|   1|    4|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+298|  4|   1|    4|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+299|  4|   1|    4|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+300|  4|   1|    4|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+301|  2|   4|    8|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+302|  2|   4|    8|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+303|  2|   4|    8|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+304|  2|   4|    8|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+305|  2|   4|    8|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+306|  2|   4|    8|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+307|  2|   4|    8|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+308|  2|   4|    8|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+309|  2|   4|    8|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+310|  2|   4|    8|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+311|  2|   4|    8|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+312|  2|   4|    8|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+313|  2|   4|    8|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+314|  2|   2|    4|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+315|  2|   2|    4|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+316|  2|   2|    4|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+317|  2|   2|    4|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+318|  2|   2|    4|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+319|  2|   2|    4|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+320|  2|   2|    4|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+321|  2|   2|    4|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+322|  2|   2|    4|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+323|  2|   2|    4|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+324|  2|   2|    4|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+325|  2|   2|    4|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+326|  2|   2|    4|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+327|  2|   1|    2|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+328|  2|   1|    2|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+329|  2|   1|    2|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+330|  2|   1|    2|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+331|  2|   1|    2|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+332|  2|   1|    2|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+333|  2|   1|    2|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+334|  2|   1|    2|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+335|  2|   1|    2|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+336|  2|   1|    2|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+337|  2|   1|    2|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+338|  2|   1|    2|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+339|  2|   1|    2|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+340|  1|   4|    4|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+341|  1|   4|    4|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+342|  1|   4|    4|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+343|  1|   4|    4|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+344|  1|   4|    4|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+345|  1|   4|    4|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+346|  1|   4|    4|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+347|  1|   4|    4|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+348|  1|   4|    4|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+349|  1|   4|    4|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+350|  1|   4|    4|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+351|  1|   4|    4|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+352|  1|   4|    4|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+353|  1|   2|    2|..tcp', |I_MPI_ADJUST_BCAST         |IMB Bcast          | - |
+354|  1|   2|    2|..tcp', |I_MPI_ADJUST_BARRIER       |IMB Barrier        | - |
+355|  1|   2|    2|..tcp', |I_MPI_ADJUST_GATHER        |IMB Gather         | - |
+356|  1|   2|    2|..tcp', |I_MPI_ADJUST_GATHERV       |IMB Gatherv        | - |
+357|  1|   2|    2|..tcp', |I_MPI_ADJUST_ALLGATHER     |IMB Allgather      | - |
+358|  1|   2|    2|..tcp', |I_MPI_ADJUST_ALLGATHERV    |IMB Allgatherv     | - |
+359|  1|   2|    2|..tcp', |I_MPI_ADJUST_SCATTER       |IMB Scatter        | - |
+360|  1|   2|    2|..tcp', |I_MPI_ADJUST_SCATTERV      |IMB Scatterv       | - |
+361|  1|   2|    2|..tcp', |I_MPI_ADJUST_REDUCE        |IMB Reduce         | - |
+362|  1|   2|    2|..tcp', |I_MPI_ADJUST_ALLREDUCE     |IMB Allreduce      | - |
+363|  1|   2|    2|..tcp', |I_MPI_ADJUST_REDUCE_SCATTER|IMB Reduce_scatter | - |
+364|  1|   2|    2|..tcp', |I_MPI_ADJUST_ALLTOALL      |IMB Alltoall       | - |
+365|  1|   2|    2|..tcp', |I_MPI_ADJUST_ALLTOALLV     |IMB Alltoallv      | - |
+--------------------------------------------------------------------------------
+31'May'16 11:34:29     | Tuning process started...
+31'May'16 11:34:29     | Working thread 'TASK 1 from 365' started at 31'May'16 11:34:29 .
+31'May'16 11:34:29     | TASK 1 from 365 : Defining source of data for processing and for launching of tuning...
+31'May'16 11:34:29     | TASK 1 from 365 : Data source is: 'time based for best range'.
+31'May'16 11:34:29     | TASK 1 from 365 : Working with I_MPI_DYNAMIC_CONNECTION option.
+31'May'16 11:34:29     | TASK 1 from 365 : Loading list of steps...
+31'May'16 11:34:29     | TASK 1 from 365 : List of steps loaded and prepared.
+31'May'16 11:34:29     | Ranges:
+{
+	'0'
+	'1'
+}
+31'May'16 11:34:29     | TASK 1 from 365 : Calculating the time of test execution with default parameters...
+31'May'16 11:34:29     | TASK 1 from 365 : /usr/local/intel2016/compilers_and_libraries_2016.3.210/linux/mpi/intel64/bin/mpiexec.hydra   -perhost 4 -machinefile "/share/MPI/lab01/ex1/mpitune_temp/mpituner_HlX0Dr_tmp"  -n 32 -env I_MPI_FABRICS shm:tcp  "IMB-MPI1" -npmin 32 -iter 1000 -iter_policy auto -msglen "/share/MPI/lab01/ex1/mpitune_temp/mpituner_HDZ0Bd_tmp" Sendrecv
+31'May'16 12:13:20 WRN | Catched signal with code 2 (frame is <frame object at 0x12c7260>). Safe application's termination started...
+31'May'16 12:13:20     | Report saving...
+31'May'16 12:13:20     | Complete.
+31'May'16 12:13:20 INF | Safe application's termination completed.
+31'May'16 12:13:20     | Attention! No results have been obtained during current tuning process. It may be caused by:
+- Tuning process has not been completed at all due to one of follow reasons:
+	* Time limitations
+	* Critical errors in process
+	* Abort of the process by user
+	* Other
+You can find more information in log-file/output.
+31'May'16 12:13:20     | Time of work automatic tuning utility is 0h:41m:57s:593ms
+31'May'16 12:13:20 ERR | TASK 1 from 365 : All iterations failed. Testing of current option has been skipped
+31'May'16 12:13:20 WRN | TASK 1 from 365 : Work with I_MPI_DYNAMIC_CONNECTION option finished with some errors.
+31'May'16 12:13:20 ERR | Exception in read file procedure: [Errno 2] No such file or directory: '/share/MPI/lab01/ex1/mpitune_temp/mpituner_HlX0Dr_tmp'
